@@ -1,0 +1,145 @@
+✅ Objective
+Build a cross-platform drawing and animation app that replicates and extends the full functionality of:
+
+Excalidraw — Infinite whiteboard-style canvas for sketching
+
+Excalidraw Animate — Stroke-by-stroke animation and playback of Excalidraw drawings
+
+The application must:
+
+Be available as a native app (Electron, Tauri, or mobile) or fully featured PWA
+
+Use a Python backend (e.g., FastAPI or Flask) to handle:
+
+File conversion & rendering (e.g., MP4/WebM export)
+
+Persistent scene storage (e.g., SQLite or filesystem)
+
+Future AI integrations (e.g., auto-drawing suggestions)
+
+💡 Features to Implement
+🧩 Drawing Interface (Frontend)
+Replicate all essential Excalidraw functionality:
+
+Infinite canvas with pan/zoom
+
+Drawing tools: Pencil (freehand strokes), Shapes (rectangle, ellipse, diamond, arrow, line), Text, Image
+
+Layers and z-ordering
+
+Grouping, selection, resizing, rotating
+
+Scene saving/loading as .excalidraw or JSON
+
+Export as SVG, PNG, JSON (via frontend)
+
+🎬 Stroke-by-Stroke Animation (Frontend + Backend)
+Incorporate animation playback as in Excalidraw Animate, plus add customizable control over:
+
+🖌️ Stroke vs Shape Animation
+Stroke: Animate freehand lines point-by-point
+
+Shape: Animate shape creation as:
+
+Instant appearance
+
+Or animated “grow in” (e.g., scale from center)
+
+🧭 Virtual Camera
+Smooth pan/zoom across canvas to follow strokes in a cinematic way
+
+Configurable viewport margin or padding
+
+Optional "Fit to content" framing per scene
+
+⚙️ Timing and Speed Controls (Export Settings UI)
+Add a settings panel (before export) with:
+
+Setting	Description
+Delay Between Strokes	Time in ms between two freehand strokes
+Delay Between Shapes	Time between two shapes (rect, circle, arrow, etc.)
+Delay Between Shape and Stroke	Extra pause when switching from a shape to a stroke
+Stroke Animation Speed Multiplier	Speed of point-by-point drawing of strokes (higher = faster)
+Shape Animation Speed Multiplier	Speed of "grow in" animations for shapes
+Frame Rate (FPS)	Target video frame rate (e.g., 30fps, 60fps)
+Output Resolution	HD (720p), Full HD (1080p), or Custom dimensions
+Background Color	Set canvas background color for final export
+Animation Padding (Camera)	Pixels to leave around animated elements when panning
+File Format	Export to .webm (VP9) and .mp4 (via ffmpeg backend)
+
+📥 Import / Export
+Load .excalidraw or .json scene files
+
+Export to:
+
+Video (.webm and .mp4 with settings above)
+
+SVG / PNG (as in Excalidraw)
+
+GIF (optional, backend-encoded)
+
+.excalidraw and JSON
+
+Allow partial exports (selected elements only)
+
+🧰 Backend Responsibilities (Python)
+Use Python (FastAPI or Flask) to handle:
+
+Video rendering pipeline:
+
+Accepts JSON scene + animation settings
+
+Renders using Puppeteer (headless browser) or Node-Canvas via pyppeteer, playwright, or ffmpeg pipeline
+
+Scene database:
+
+Optional: Store user-created scenes for replay or resuming later
+
+Use SQLite or file-based scene storage
+
+File conversion tools:
+
+.webm → .mp4 (via ffmpeg)
+
+Optionally, create thumbnail previews for scenes
+
+🧪 Testing & Usability
+Provide a timeline-based playback bar (like a video editor scrubber)
+
+Support pause/play/seek preview of animations
+
+Allow users to preview animation before export
+
+Save and load timing presets (as profiles)
+
+🛠️ Tech Stack Suggestions
+Layer	Tool(s)
+Frontend	React + Tailwind or Next.js with Excalidraw embedded
+Animation	Fork of Excalidraw Animate with improvements
+Native App	Electron / Tauri / React Native (optional)
+Backend	Python (FastAPI or Flask)
+Export Engine	ffmpeg, playwright, puppeteer, or Node-based rendering headless
+Storage	SQLite / Filesystem (or PostgreSQL for cloud)
+
+🧩 Optional Bonus Features
+AI-assisted drawing: Generate shapes or diagrams from text (OpenAI Vision or DALL·E sketch-to-diagram)
+
+Collaborative drawing: Real-time multiplayer using WebSockets
+
+PDF export of animation frames
+
+Audio narration sync with animation
+
+Keyboard shortcuts for animation control
+
+🔚 Deliverables
+Fully working app with all core Excalidraw and Animate features
+
+Video export pipeline integrated into backend
+
+GUI for timing/speed control before export
+
+Smooth camera movement in all animations
+
+Export settings modal that persists preferences
+
